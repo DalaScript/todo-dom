@@ -28,12 +28,46 @@
             <h1 class="text-2xl font-bold mb-4 text-center">Welcome</h1>
             <div id="userInfo" class="space-y-2 text-gray-700"></div>
             <h2 class="text-xl font-semibold mt-8 mb-2 text-center">
+                Filter & Search
+            </h2>
+            <select 
+                id="completedFilter"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            >
+                <option value="all">All</option>
+                <option value="true">Completed</option>
+                <option value="false">Incomplete</option>
+            </select>
+            <select 
+                id="sortOrder"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+            >
+                <option value="desc">Newest Firsts</option>
+                <option value="asc">Oldest First</option>
+            </select>
+            <div class="mb-6 space-y-3">
+                <input 
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search task by name"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                >
+            </div>
+            <h2 class="text-xl font-semibold mt-8 mb-2 text-center">
                 Add New Task
             </h2>
             <form id="taskForm" class="space-y-4 mb-6">
-                <input type="text" id="taskInput" placeholder="Add Task" required
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg" />
-                <select id="priorityInput" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                <input 
+                  type="text" 
+                  id="taskInput" 
+                  placeholder="Add Task" 
+                  required
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg" 
+                />
+                <select 
+                  id="priorityInput" 
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                >
                     <option value="0" selected disabled>
                         Pick priority of your task
                     </option>
@@ -48,28 +82,42 @@
                     <option value="9">Priority 9 - Emergency</option>
                     <option value="10">Priority 10 - Emergency Most Urgent</option>
                 </select>
-                <button type="submit"
-                    class="w-full bg-primary rounded-lg text-white py-2 hover:bg-indigo-700 trasition">
+                <button 
+                  type="submit"
+                  class="w-full bg-primary rounded-lg text-white py-2 hover:bg-indigo-700 trasition"
+                >
                     Add Task
                 </button>
             </form>
             <h2 class="text-xl font-semibold mt-8 mb-4 text-center">Your Tasks</h2>
-            <div id="taskList" class="space-y-4"></div>
+            <div 
+              id="taskList" 
+              class="space-y-4 max-h-[300px] overflow-y-auto"
+            ></div>
             <button 
-                id="logoutBtn" 
-                class="mt-6 w-full bg-red-500 text-white py-2 hover:bg-red-700">
+              id="logoutBtn" 
+              class="mt-6 w-full bg-red-500 text-white py-2 hover:bg-red-700"
+            >
                 Logout
             </button>
         </div>
     </div>
 
     <!-- modal div -->
-    <div id="editModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+    <div 
+      id="editModal" 
+      class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50"
+    >
         <div class="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg relative">
             <h2 class="text-xl font-semibold mb-4">Edit Task</h2>
             <form id="editForm" class="space-y-4">
-                <input type="text" id="editTaskName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                    placeholder="Task Name" />
+                <input 
+                  type="text" 
+                  id="editTaskName" 
+                  required class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                  placeholder="Task Name" 
+                  required
+                />
                 <select id="editPriority">
                     <option value="1">Priority 1 - Low I might do or not</option>
                     <option value="2">Priority 2 - Low we can do in the future</option>
@@ -83,10 +131,17 @@
                     <option value="10">Priority 10 - Emergency Most Urgent</option>
                 </select>
                 <div class="flex justify-end gap-2">
-                    <button type="button" id="cancelEdit" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                    <button 
+                      type="button" 
+                      id="cancelEdit" 
+                      class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    >
                         Cancel
                     </button>
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-blue-700">
+                    <button 
+                      type="submit" 
+                      class="px-4 py-2 bg-primary text-white rounded hover:bg-blue-700"
+                    >
                         Save
                     </button>
                 </div>
