@@ -1,5 +1,10 @@
-import { createTask, getUserTasks } from "../api/taskApi";
-import { renderTasksToDom } from "../u"
+import { 
+    createTask, 
+    getUserTasks,
+    updateTask,
+    deleteTask,
+} from "../api/taskApi.js";
+import { renderTasksToDom } from "../utils/renderTasks.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("token");
@@ -10,10 +15,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if(!token) return;
 
-    async function fetchAndRenderTasks(token) {
+    async function fetchAndRenderTasks() {
         try {
             const tasks = await getUserTasks(token);
-            renderTasksToDom(taskList, tasks);
+            renderTasksToDom(
+                taskList, 
+                tasks,
+                async (taskId) => {
+                    const task = tasks.find((t) => t._id === taskId);
+                    if(!task) return;
+                    await updateTask(token, taskId, { completed: !task.completed });
+                    await fetchAndRenderTasks();
+                },
+                async (taskid) => {
+                    await deleteTask(token, taskid);
+                    await fetchAndRenderTasks();
+                }
+            );
         }catch(err) {
             taskList.innerHTML = `<p class='text-red-500 text-center'>${err.message}</p>`;
         }
@@ -21,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     taskForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const taskText = taskInput.ariaValueMax.trim();
+        const taskText = taskInput.value.trim();
         const priority = parseInt(prioritySelect.value);
 
         if(!taskText) return;
