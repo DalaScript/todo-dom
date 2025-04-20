@@ -1,5 +1,11 @@
 
-export function renderTasksToDom(taskListEl, tasks, onComplete, onDelete) {
+export function renderTasksToDom(
+    taskListEl, 
+    tasks, 
+    onComplete, 
+    onDelete,
+    onEdit
+) {
     if(tasks.length === 0) {
         taskListEl.innerHTML = `<p class="text-gray-500 text-center">No tasks found</p>`;
         return;
@@ -25,6 +31,9 @@ export function renderTasksToDom(taskListEl, tasks, onComplete, onDelete) {
                     </button>
                     <button data-id="${
                         task._id
+                    }" class="edit-btn text-sm text-white bg-blue-500 px-3 py-1 rounded hover:bg-blue-600">✏️</button>
+                    <button data-id="${
+                        task._id
                     }" class="delete-btn text-sm text-white bg-red-500 px-3 py-1 rounded hover:bg-red-600">Delete</button>
                 </div>
             </div>
@@ -38,5 +47,9 @@ export function renderTasksToDom(taskListEl, tasks, onComplete, onDelete) {
 
     taskListEl.querySelectorAll(".delete-btn").forEach((btn) => {
         btn.addEventListener("click", async () => onDelete(btn.dataset.id));
+    });
+    
+    taskListEl.querySelectorAll(".edit-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => onEdit(btn.dataset.id));
     });
 }
