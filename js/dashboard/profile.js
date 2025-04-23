@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = "index.html";
     }
 
-    userInfo.innderHTML = isLoading;
+    userInfo.innerHTML = isLoading;
 
     try {
         const profile = await getUserProfile(token);

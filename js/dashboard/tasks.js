@@ -3,7 +3,7 @@ import {
     getUserTasks,
     updateTask,
     deleteTask,
-} from "../api/taskApi.js";
+} from "../api/tasksApi.js";
 import { renderTasksToDom } from "../utils/renderTasks.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let editingTaskId = null;
 
     async function handleComplete(tasks, taskId) {
-        const task = task.find((t) => t._id === taskId);
+        const task = tasks.find((t) => t._id === taskId);
         if(!task) return;
         await updateTask(token, taskId, { completed: !task.completed });
         await fetchAndRenderTasks();
@@ -133,5 +133,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         fetchAndRenderTasks();
     });
 
-    fetchAndRenderTasks(); 
+    fetchAndRenderTasks();
 });

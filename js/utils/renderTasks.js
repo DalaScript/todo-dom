@@ -1,4 +1,3 @@
-
 export function renderTasksToDom(
     taskListEl, 
     tasks, 
@@ -9,12 +8,13 @@ export function renderTasksToDom(
     console.log("Rendered task list with:", tasks.length, "tasks");
     taskListEl.innerHTML = "";
     if(tasks.length === 0) {
-        taskListEl.innerHTML = `<p class="text-gray-500 text-center">No tasks found</p>`;
+        taskListEl.innerHTML = 
+            "<p class='text-gray-500 text-center'>No tasks found</p>";
         return;
     }
     taskListEl.innerHTML = tasks.map((task) => {
         return `
-            <div class="p-4 bg-white border rounded shadow-sm">
+            <div class="p-4 bg-white flex flex-col gap-3 justify-between items-center border rounded shadow-sm">
                 <h3 class="font-semibold text-lg">${task.task}</h3>
                 <p class="font-semibold text-lg">Priority:${task.priority}</p>
                 <p class="text-sm">Completed: ${task.completed ? "✅" : "🚫"}</p>
@@ -27,7 +27,7 @@ export function renderTasksToDom(
 
                 <div class="flex gap-2">
                     <button data-id="${
-                        task.id
+                        task._id
                     }" class="complete-btn text-sm text-white bg-green-500 px-3 py-1 rounded hover:bg-green-600">
                         ${task.completed ? "Undo" : "Complete"}
                     </button>
